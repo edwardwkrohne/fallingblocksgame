@@ -17,7 +17,7 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST( anotherExample );
     CPPUNIT_TEST( testEquals );
     CPPUNIT_TEST_SUITE_END();
-
+    //changes 
 
     double			m_value1;
     double			m_value2;
