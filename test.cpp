@@ -6,7 +6,11 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+#include <sstream>
+#include <algorithm>
+#include "block.h"
 
+using namespace std;
 
 class ExampleTestCase : public CppUnit::TestCase
 {
@@ -15,15 +19,17 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST_SUITE( ExampleTestCase );
     CPPUNIT_TEST( example );
     CPPUNIT_TEST( anotherExample );
-    CPPUNIT_TEST( testEquals );
+    // CPPUNIT_TEST( testEquals );
+    CPPUNIT_TEST( testRotate );
     CPPUNIT_TEST_SUITE_END();
-    //changes 
+    //changes
 
     double			m_value1;
     double			m_value2;
     void			example ();
     void			anotherExample ();
-    void			testEquals ();
+    // void			testEquals ();
+    void            testRotate ();
 public:
 
     void			setUp ();
@@ -55,26 +61,60 @@ void ExampleTestCase::anotherExample ()
     CPPUNIT_ASSERT (2 == 2);
 }
 
-
-
-void ExampleTestCase::testEquals ()
+void ExampleTestCase::testRotate ()
 {
-    std::auto_ptr<long>	l1 (new long (12));
-    std::auto_ptr<long>	l2 (new long (12));
+    char block[5][5] = {
+        {' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' '},
+        {' ', '*', '*', '*', ' '},
+        {' ', ' ', ' ', '*', ' '},
+        {' ', ' ', ' ', ' ', ' '}
+    };
 
+    const char expected_block[5][5] = {
+        {' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', '*', ' ', ' '},
+        {' ', ' ', '*', ' ', ' '},
+        {' ', ' ', '*', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' '}
+    };
 
-    CPPUNIT_ASSERT_DOUBLES_EQUAL (m_value1, 2.0, 0.01);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL (m_value2, 3.0, 0.01);
-    CPPUNIT_ASSERT_EQUAL (12, 12);
-    CPPUNIT_ASSERT_EQUAL (12L, 12L);
-    CPPUNIT_ASSERT_EQUAL (*l1, *l2);
+    rotateCW(block);
 
+    ostringstream message;
 
-    CPPUNIT_ASSERT(12L == 12L);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL (12.0, 11.99, 0.5);
+    message << "Expected: " << endl;
+    printBlock(expected_block, message);
+
+    message << "But got: " << endl;
+    printBlock(block, message);
+
+    CPPUNIT_ASSERT_MESSAGE(
+        message.str(),
+        equal(&block[0][0], &block[5][0], &expected_block[0][0])
+    );
 }
 
 
+// void ExampleTestCase::testEquals ()
+// {
+//     std::auto_ptr<long>	l1 (new long (12));
+//     std::auto_ptr<long>	l2 (new long (12));
+//
+//
+//     CPPUNIT_ASSERT_DOUBLES_EQUAL (m_value1, 2.0, 0.01);
+//     CPPUNIT_ASSERT_DOUBLES_EQUAL (m_value2, 3.0, 0.01);
+//     CPPUNIT_ASSERT_EQUAL (12, 12);
+//     CPPUNIT_ASSERT_EQUAL (12L, 12L);
+//     CPPUNIT_ASSERT_EQUAL (*l1, *l2);
+//
+//
+//     CPPUNIT_ASSERT(12L == 12L);
+//     CPPUNIT_ASSERT_DOUBLES_EQUAL (12.0, 11.99, 0.5);
+// }
+
+/////////////////////////////////////////////////////
+// No need to modify anything below this line
 
 CppUnit::Test *suite()
 {
