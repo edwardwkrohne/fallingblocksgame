@@ -3,4 +3,4 @@ test:
 	./run_tests
 
 clean:
-	rm *.o run_tests a.out
+	rm -f *.o run_tests a.out
