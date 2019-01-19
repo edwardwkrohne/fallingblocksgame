@@ -93,10 +93,8 @@ char Block::get(int row, int col) {
   return block[row][col];
 }
 
-void Block::set(int row, int col, char b) {
-  block[row][col] = b;
-}
-void rotateCW(char (&block)[5][5]) {
+
+void Block::rotateCW() {
   char temp_block[5][5];
   for (int i =0;i < 5; i++){
     for (int j =0; j < 5; j++){
@@ -110,7 +108,7 @@ void rotateCW(char (&block)[5][5]) {
   }
 }
 
-void rotateCCW(char (&block)[5][5]) {
+void Block::rotateCCW() {
 //create a tempoary array here bc u want it destroyed after fuction is done
   char temp_block[5][5];
 //rotating block to a temp block
@@ -124,5 +122,14 @@ void rotateCCW(char (&block)[5][5]) {
     for (int j =0; j < 5; j++){
       data[i][j] = temp_block[i][j] ;
     }
+  }
+}
+
+void Block::print(ostream& out) {
+  for ( int i = 0; i < 5; i++ ) {
+    for ( int j = 0; j < 5; j++ ) {
+      out << block[i][j] << " ";
+    }
+    out << endl;
   }
 }
