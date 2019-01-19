@@ -9,6 +9,8 @@ public:
   char get(int row, int col);
   // other functions that you want go here.
 
+  
+
   void rotateCW();
   void rotateCCW();
   void print(ostream& out);

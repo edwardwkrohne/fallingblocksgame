@@ -131,6 +131,25 @@ void ExampleTestCase::testRotateCCW ()
     );
 }
 
+void ExampleTestCase::testRotateCCW ()
+{
+    ostrstream expected;
+    expected << "          " << endl;
+    expected << "    * *   " << endl;
+    expected << "    *     " << endl;
+    expected << "    *     " << endl;
+    expected << "          " << endl;
+
+    Block block(0,0, 0); // Is zero an L?
+
+    block.rotateCCW();
+
+    ostrstream result;
+    block.print(result);
+
+    CPPUNIT_ASSERT_EQUAL(expected.str(), result.str());
+}
+
 // void ExampleTestCase::testEquals ()
 // {
 //     std::auto_ptr<long>	l1 (new long (12));
