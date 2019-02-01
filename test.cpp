@@ -160,7 +160,7 @@ void ExampleTestCase::testCheckCollision ()
     Block block1(0,0, 0); // Is zero an L?
     Block block2(0,1, 0); // Is zero an L?
 
-    Grid grid({
+    Grid GameGrid({
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -184,7 +184,7 @@ void ExampleTestCase::testCheckCollision ()
     });
 
     CPPUNIT_ASSERT(block1.checkCollision(grid));
-    CPPUNIT_ASSERT(block2.checkCollision(grid));
+    CPPUNIT_ASSERT(!block2.checkCollision(grid));
 }
 
 // void ExampleTestCase::testEquals ()
