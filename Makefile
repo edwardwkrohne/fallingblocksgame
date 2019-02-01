@@ -1,5 +1,5 @@
 test:
-	g++ -g test.cpp block.cpp -lcppunit -o run_tests
+	g++ -g test.cpp block.cpp gamegrid.cpp -lcppunit -o run_tests
 	./run_tests
 
 clean:

@@ -32,6 +32,8 @@ class ExampleTestCase : public CppUnit::TestCase
     // void			testEquals ();
     void            testRotateCW ();
     void            testRotateCCW ();
+
+    void            testCheckCollision ();
 public:
 
     void			setUp ();
@@ -97,43 +99,43 @@ void ExampleTestCase::testRotateCW ()
     );
 }
 
+// void ExampleTestCase::testRotateCCW ()
+// {
+//     char block[5][5] = {
+//         {' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' '},
+//         {' ', '*', '*', '*', ' '},
+//         {' ', ' ', ' ', '*', ' '},
+//         {' ', ' ', ' ', ' ', ' '}
+//     };
+//
+//     const char expected_block[5][5] = {
+//         {' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', '*', '*', ' '},
+//         {' ', ' ', '*', ' ', ' '},
+//         {' ', ' ', '*', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' '}
+//     };
+//
+//     rotateCCW(block);
+//
+//     ostringstream message;
+//
+//     message << "Expected: " << endl;
+//     printBlock(expected_block, message);
+//
+//     message << "But got: " << endl;
+//     printBlock(block, message);
+//
+//     CPPUNIT_ASSERT_MESSAGE(
+//         message.str(),
+//         equal(&block[0][0], &block[5][0], &expected_block[0][0])
+//     );
+// }
+
 void ExampleTestCase::testRotateCCW ()
 {
-    char block[5][5] = {
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', '*', '*', '*', ' '},
-        {' ', ' ', ' ', '*', ' '},
-        {' ', ' ', ' ', ' ', ' '}
-    };
-
-    const char expected_block[5][5] = {
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', '*', '*', ' '},
-        {' ', ' ', '*', ' ', ' '},
-        {' ', ' ', '*', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' '}
-    };
-
-    rotateCCW(block);
-
-    ostringstream message;
-
-    message << "Expected: " << endl;
-    printBlock(expected_block, message);
-
-    message << "But got: " << endl;
-    printBlock(block, message);
-
-    CPPUNIT_ASSERT_MESSAGE(
-        message.str(),
-        equal(&block[0][0], &block[5][0], &expected_block[0][0])
-    );
-}
-
-void ExampleTestCase::testRotateCCW ()
-{
-    ostrstream expected;
+    ostringstream expected;
     expected << "          " << endl;
     expected << "    * *   " << endl;
     expected << "    *     " << endl;
@@ -144,10 +146,43 @@ void ExampleTestCase::testRotateCCW ()
 
     block.rotateCCW();
 
-    ostrstream result;
+    ostringstream result;
     block.print(result);
 
     CPPUNIT_ASSERT_EQUAL(expected.str(), result.str());
+}
+
+void ExampleTestCase::testCheckCollision ()
+{
+
+    Block block1(0,0, 0); // Is zero an L?
+    Block block2(0,1, 0); // Is zero an L?
+
+    Grid grid({
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+    });
+
+    CPPUNIT_ASSERT(block1.checkCollision(grid));
+    CPPUNIT_ASSERT(block2.checkCollision(grid));
 }
 
 // void ExampleTestCase::testEquals ()
