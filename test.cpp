@@ -9,6 +9,9 @@
 #include <sstream>
 #include <algorithm>
 #include "block.h"
+#include "piece.h"
+
+
 
 using namespace std;
 
@@ -96,44 +99,43 @@ void ExampleTestCase::testRotateCW ()
         equal(&block[0][0], &block[5][0], &expected_block[0][0])
     );
 }
+// void ExampleTestCase::testRotateCCW ()
+// {
+//     char block[5][5] = {
+//         {' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' '},
+//         {' ', '*', '*', '*', ' '},
+//         {' ', ' ', ' ', '*', ' '},
+//         {' ', ' ', ' ', ' ', ' '}
+//     };
+//
+//     const char expected_block[5][5] = {
+//         {' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', '*', '*', ' '},
+//         {' ', ' ', '*', ' ', ' '},
+//         {' ', ' ', '*', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' '}
+//     };
+//
+//     rotateCCW(block);
+//
+//     ostringstream message;
+//
+//     message << "Expected: " << endl;
+//     printBlock(expected_block, message);
+//
+//     message << "But got: " << endl;
+//     printBlock(block, message);
+//
+//     CPPUNIT_ASSERT_MESSAGE(
+//         message.str(),
+//         equal(&block[0][0], &block[5][0], &expected_block[0][0])
+//     );
+// }
 
 void ExampleTestCase::testRotateCCW ()
 {
-    char block[5][5] = {
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', '*', '*', '*', ' '},
-        {' ', ' ', ' ', '*', ' '},
-        {' ', ' ', ' ', ' ', ' '}
-    };
-
-    const char expected_block[5][5] = {
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', '*', '*', ' '},
-        {' ', ' ', '*', ' ', ' '},
-        {' ', ' ', '*', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' '}
-    };
-
-    rotateCCW(block);
-
-    ostringstream message;
-
-    message << "Expected: " << endl;
-    printBlock(expected_block, message);
-
-    message << "But got: " << endl;
-    printBlock(block, message);
-
-    CPPUNIT_ASSERT_MESSAGE(
-        message.str(),
-        equal(&block[0][0], &block[5][0], &expected_block[0][0])
-    );
-}
-
-void ExampleTestCase::testRotateCCW ()
-{
-    ostrstream expected;
+    ostringstream expected;
     expected << "          " << endl;
     expected << "    * *   " << endl;
     expected << "    *     " << endl;
@@ -144,7 +146,7 @@ void ExampleTestCase::testRotateCCW ()
 
     block.rotateCCW();
 
-    ostrstream result;
+    ostringstream result;
     block.print(result);
 
     CPPUNIT_ASSERT_EQUAL(expected.str(), result.str());
