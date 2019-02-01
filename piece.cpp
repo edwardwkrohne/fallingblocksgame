@@ -56,7 +56,10 @@ const char piece_Z[5][5] = {
   {' ', ' ', ' ', ' ', ' '}
 };
 
-Block::Block(int y, int x, int pieceId) {
+Block::Block(int _y, int _x, int pieceId) {
+    y = _y;
+    x = _x;
+
   switch (pieceId) {
     case 0:
       copy_pieces(data, piece_L);

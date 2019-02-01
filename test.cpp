@@ -135,43 +135,6 @@ void ExampleTestCase::testRotateCW ()
 //     );
 // }
 
-<<<<<<< HEAD
-=======
-// void ExampleTestCase::testRotateCCW ()
-// {
-//     char block[5][5] = {
-//         {' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' '},
-//         {' ', '*', '*', '*', ' '},
-//         {' ', ' ', ' ', '*', ' '},
-//         {' ', ' ', ' ', ' ', ' '}
-//     };
-//
-//     const char expected_block[5][5] = {
-//         {' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', '*', '*', ' '},
-//         {' ', ' ', '*', ' ', ' '},
-//         {' ', ' ', '*', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' '}
-//     };
-//
-//     rotateCCW(block);
-//
-//     ostringstream message;
-//
-//     message << "Expected: " << endl;
-//     printBlock(expected_block, message);
-//
-//     message << "But got: " << endl;
-//     printBlock(block, message);
-//
-//     CPPUNIT_ASSERT_MESSAGE(
-//         message.str(),
-//         equal(&block[0][0], &block[5][0], &expected_block[0][0])
-//     );
-// }
-
->>>>>>> 922517db91270b85f5cddb31320af15f63b33fc1
 void ExampleTestCase::testRotateCCW ()
 {
     ostringstream expected;

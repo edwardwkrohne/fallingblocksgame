@@ -1,5 +1,10 @@
 // Some sort of brief comment here
+#ifndef BLOCK_H
+#define BLOCK_H
+
 #include <iostream>
+#include "gamegrid.h"
+
 
 class Block {
 public:
@@ -10,12 +15,7 @@ public:
   char get(int row, int col);
   // other functions that you want go here.
 
-
-
-  void rotateCW();
-  void rotateCCW();
-  void print(std::ostream& out);
-
+bool checkCollision(GameGrid& grid);
 
 private:
   void copy_pieces(char (&dest)[5][5], const char (&src)[5][5]);
@@ -26,3 +26,5 @@ private:
   char data[5][5];
 
 };
+
+#endif

@@ -1,7 +1,8 @@
-#inclide "piece.h"
 
 #ifndef GAMEGRID_H
 #define GAMEGRID_H
+
+#include "piece.h"
 
 class GameGrid {
 public:
