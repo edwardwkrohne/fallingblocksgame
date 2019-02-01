@@ -3,27 +3,30 @@
 #define BLOCK_H
 
 #include <iostream>
-#include "gamegrid.h"
 
+class GameGrid;
 
 class Block {
 public:
-  //constructor
-  Block(int y, int x, int pieceId );
+    //constructor
+    Block(int y, int x, int pieceId );
 
 
-  char get(int row, int col);
-  // other functions that you want go here.
+    char get(int row, int col);
 
-bool checkCollision(GameGrid& grid);
+    bool checkCollision(GameGrid& grid);
 
+    void rotateCW();
+    void rotateCCW();
+
+    void print(std::ostream& out);
 private:
-  void copy_pieces(char (&dest)[5][5], const char (&src)[5][5]);
-  int x;
-  int y;
+    void copy_pieces(char (&dest)[5][5], const char (&src)[5][5]);
+    int x;
+    int y;
 
 
-  char data[5][5];
+    char data[5][5];
 
 };
 

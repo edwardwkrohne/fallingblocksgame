@@ -22,21 +22,19 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST_SUITE( ExampleTestCase );
     CPPUNIT_TEST( example );
     CPPUNIT_TEST( anotherExample );
-    // CPPUNIT_TEST( testEquals );
     CPPUNIT_TEST( testRotateCW );
     CPPUNIT_TEST( testRotateCCW );
+    // CPPUNIT_TEST( testCheckCollision );
     CPPUNIT_TEST_SUITE_END();
-    //changes
 
     double			m_value1;
     double			m_value2;
     void			example ();
     void			anotherExample ();
-    // void			testEquals ();
     void            testRotateCW ();
     void            testRotateCCW ();
 
-    void            testCheckCollision ();
+    // void            testCheckCollision ();
 public:
 
     void			setUp ();
@@ -101,47 +99,14 @@ void ExampleTestCase::testRotateCW ()
         equal(&block[0][0], &block[5][0], &expected_block[0][0])
     );
 }
-// void ExampleTestCase::testRotateCCW ()
-// {
-//     char block[5][5] = {
-//         {' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' '},
-//         {' ', '*', '*', '*', ' '},
-//         {' ', ' ', ' ', '*', ' '},
-//         {' ', ' ', ' ', ' ', ' '}
-//     };
-//
-//     const char expected_block[5][5] = {
-//         {' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', '*', '*', ' '},
-//         {' ', ' ', '*', ' ', ' '},
-//         {' ', ' ', '*', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' '}
-//     };
-//
-//     rotateCCW(block);
-//
-//     ostringstream message;
-//
-//     message << "Expected: " << endl;
-//     printBlock(expected_block, message);
-//
-//     message << "But got: " << endl;
-//     printBlock(block, message);
-//
-//     CPPUNIT_ASSERT_MESSAGE(
-//         message.str(),
-//         equal(&block[0][0], &block[5][0], &expected_block[0][0])
-//     );
-// }
 
 void ExampleTestCase::testRotateCCW ()
 {
     ostringstream expected;
     expected << "          " << endl;
-    expected << "    * *   " << endl;
-    expected << "    *     " << endl;
-    expected << "    *     " << endl;
+    expected << "      *   " << endl;
+    expected << "  * * *   " << endl;
+    expected << "          " << endl;
     expected << "          " << endl;
 
     Block block(0,0, 0); // Is zero an L?
@@ -154,54 +119,37 @@ void ExampleTestCase::testRotateCCW ()
     CPPUNIT_ASSERT_EQUAL(expected.str(), result.str());
 }
 
-void ExampleTestCase::testCheckCollision ()
-{
-
-    Block block1(0,0, 0); // Is zero an L?
-    Block block2(0,1, 0); // Is zero an L?
-
-    Grid GameGrid({
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-    });
-
-    CPPUNIT_ASSERT(block1.checkCollision(grid));
-    CPPUNIT_ASSERT(!block2.checkCollision(grid));
-}
-
-// void ExampleTestCase::testEquals ()
+// void ExampleTestCase::testCheckCollision ()
 // {
-//     std::auto_ptr<long>	l1 (new long (12));
-//     std::auto_ptr<long>	l2 (new long (12));
 //
+//     Block block1(0,0, 0); // Is zero an L?
+//     Block block2(0,1, 0); // Is zero an L?
 //
-//     CPPUNIT_ASSERT_DOUBLES_EQUAL (m_value1, 2.0, 0.01);
-//     CPPUNIT_ASSERT_DOUBLES_EQUAL (m_value2, 3.0, 0.01);
-//     CPPUNIT_ASSERT_EQUAL (12, 12);
-//     CPPUNIT_ASSERT_EQUAL (12L, 12L);
-//     CPPUNIT_ASSERT_EQUAL (*l1, *l2);
+//     GameGrid grid({
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+//     });
 //
-//
-//     CPPUNIT_ASSERT(12L == 12L);
-//     CPPUNIT_ASSERT_DOUBLES_EQUAL (12.0, 11.99, 0.5);
+//     CPPUNIT_ASSERT(block1.checkCollision(grid));
+//     CPPUNIT_ASSERT(!block2.checkCollision(grid));
 // }
 
 /////////////////////////////////////////////////////

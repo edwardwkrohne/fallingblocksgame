@@ -6,7 +6,9 @@
 
 class GameGrid {
 public:
-    GameGrid(char (&copy)[20][10]);
+    GameGrid(const char (&copy)[20][10]);
+
+    friend Block::checkCollision(GameGrid& grid);
 
 private:
 };
