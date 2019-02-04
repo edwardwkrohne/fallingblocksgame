@@ -1,12 +1,33 @@
+// Some sort of brief comment here
+#ifndef BLOCK_H
+#define BLOCK_H
+
 #include <iostream>
 
-#ifndef BLOCK_H_INCLUDED
-#define BLOCK_H_INCLUDED
+class GameGrid;
+
+class Block {
+public:
+    //constructor
+    Block(int y, int x, int pieceId );
 
 
-void rotateCW(char (&block)[5][5]);
-void rotateCCW(char (&block)[5][5]);
+    char get(int row, int col);
 
-void printBlock(const char (&block)[5][5], std::ostream& out = std::cout);
+    bool checkCollision(GameGrid& grid);
 
-#endif // BLOCK_H_INCLUDED
+    void rotateCW();
+    void rotateCCW();
+
+    void print(std::ostream& out);
+private:
+    void copy_pieces(char (&dest)[5][5], const char (&src)[5][5]);
+    int x;
+    int y;
+
+
+    char data[5][5];
+
+};
+
+#endif

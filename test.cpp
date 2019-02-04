@@ -9,7 +9,6 @@
 #include <sstream>
 #include <algorithm>
 #include "block.h"
-#include "piece.h"
 
 
 
@@ -22,7 +21,6 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST_SUITE( ExampleTestCase );
     CPPUNIT_TEST( example );
     CPPUNIT_TEST( anotherExample );
-    CPPUNIT_TEST( testRotateCW );
     CPPUNIT_TEST( testRotateCCW );
     // CPPUNIT_TEST( testCheckCollision );
     CPPUNIT_TEST_SUITE_END();
@@ -31,7 +29,6 @@ class ExampleTestCase : public CppUnit::TestCase
     double			m_value2;
     void			example ();
     void			anotherExample ();
-    void            testRotateCW ();
     void            testRotateCCW ();
 
     // void            testCheckCollision ();
@@ -64,40 +61,6 @@ void ExampleTestCase::example ()
 void ExampleTestCase::anotherExample ()
 {
     CPPUNIT_ASSERT (2 == 2);
-}
-
-void ExampleTestCase::testRotateCW ()
-{
-    char block[5][5] = {
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', '*', '*', '*', ' '},
-        {' ', ' ', ' ', '*', ' '},
-        {' ', ' ', ' ', ' ', ' '}
-    };
-
-    const char expected_block[5][5] = {
-        {' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', '*', ' ', ' '},
-        {' ', ' ', '*', ' ', ' '},
-        {' ', '*', '*', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' '}
-    };
-
-    rotateCW(block);
-
-    ostringstream message;
-
-    message << "Expected: " << endl;
-    printBlock(expected_block, message);
-
-    message << "But got: " << endl;
-    printBlock(block, message);
-
-    CPPUNIT_ASSERT_MESSAGE(
-        message.str(),
-        equal(&block[0][0], &block[5][0], &expected_block[0][0])
-    );
 }
 
 void ExampleTestCase::testRotateCCW ()
