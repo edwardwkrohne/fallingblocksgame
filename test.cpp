@@ -5,11 +5,11 @@
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
-
 #include <sstream>
 #include <algorithm>
-#include "block.h"
 
+#include "gamegrid.h"
+#include "block.h"
 
 
 using namespace std;
@@ -22,7 +22,7 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST( example );
     CPPUNIT_TEST( anotherExample );
     CPPUNIT_TEST( testRotateCCW );
-    // CPPUNIT_TEST( testCheckCollision );
+    CPPUNIT_TEST( testhasCollisionOccurred );
     CPPUNIT_TEST_SUITE_END();
 
     double			m_value1;
@@ -31,7 +31,7 @@ class ExampleTestCase : public CppUnit::TestCase
     void			anotherExample ();
     void            testRotateCCW ();
 
-    // void            testCheckCollision ();
+    void            testhasCollisionOccurred ();
 public:
 
     void			setUp ();
@@ -82,40 +82,41 @@ void ExampleTestCase::testRotateCCW ()
     CPPUNIT_ASSERT_EQUAL(expected.str(), result.str());
 }
 
-// void ExampleTestCase::testCheckCollision ()
-// {
-//
-//     Block block1(0,0, 0); // Is zero an L?
-//     Block block2(0,1, 0); // Is zero an L?
-//
-//     GameGrid grid({
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-//     });
-//
-//     CPPUNIT_ASSERT(block1.checkCollision(grid));
-//     CPPUNIT_ASSERT(!block2.checkCollision(grid));
-// }
+void ExampleTestCase::testhasCollisionOccurred ()
+{
 
-/////////////////////////////////////////////////////
+    Block block1(0,0, 0); // Is zero an L?
+    Block block2(0,1, 0); // Is zero an L?
+
+    GameGrid grid({
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+    });
+
+    CPPUNIT_ASSERT(block1.hasCollisionOccurred(grid));
+
+    CPPUNIT_ASSERT(!block2.hasCollisionOccurred(grid));
+}
+
+///////////////////////////////////////////////////
 // No need to modify anything below this line
 
 CppUnit::Test *suite()

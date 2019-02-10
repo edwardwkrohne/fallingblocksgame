@@ -1,6 +1,8 @@
 #include "block.h"
-
+#include "gamegrid.h"
 using namespace std;
+
+
 
 const char piece_L[5][5] = {
     {' ', ' ', ' ', ' ', ' '},
@@ -138,4 +140,30 @@ void Block::print(ostream& out) {
         }
         out << endl;
     }
+}
+
+bool Block::hasCollisionOccurred(GameGrid& grid ){
+    //has a collision occured
+
+    for (int i = 0;i < 5; i++)
+    {
+        for (int j = 0;j < 5;j++)
+        {
+            
+            cout << "i=" << i << " j=" << j
+                << " grid.data[j][i]=" << grid.data[j][i]
+                << " data[j][i]=" << data[j][i] << endl;
+            if ( grid.data[j][i] == '*' && data[j][i] == '*') {
+                return true;
+            }
+        }
+
+    }
+    return false;
+
+
+
+
+
+
 }

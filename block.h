@@ -14,7 +14,7 @@ public:
 
     char get(int row, int col);
 
-    bool checkCollision(GameGrid& grid);
+    bool hasCollisionOccurred(GameGrid& grid);
 
     void rotateCW();
     void rotateCCW();
