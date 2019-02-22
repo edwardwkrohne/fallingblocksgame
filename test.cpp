@@ -85,8 +85,7 @@ void ExampleTestCase::testRotateCCW ()
 void ExampleTestCase::testhasCollisionOccurred ()
 {
 
-    Block block1(0,0, 0); // Is zero an L?
-    Block block2(0,1, 0); // Is zero an L?
+
 
     GameGrid grid({
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -110,6 +109,8 @@ void ExampleTestCase::testhasCollisionOccurred ()
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
     });
+    Block block1(0,0, 0); // Is zero an L?
+    Block block2(0,1, 0); // Is zero an L?
 
     CPPUNIT_ASSERT(block1.hasCollisionOccurred(grid));
 

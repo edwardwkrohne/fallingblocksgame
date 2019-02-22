@@ -145,17 +145,15 @@ void Block::print(ostream& out) {
 bool Block::hasCollisionOccurred(GameGrid& grid ){
     //has a collision occured
 
-    for (int i = 0;i < 5; i++)
+    for (int j = 0;j < 5 ; j++)
     {
-        for (int j = 0;j < 5;j++)
+        for (int i = 0;i < 5;i++)
         {
-            
-            cout << "i=" << i << " j=" << j
-                << " grid.data[j][i]=" << grid.data[j][i]
-                << " data[j][i]=" << data[j][i] << endl;
-            if ( grid.data[j][i] == '*' && data[j][i] == '*') {
+
+            if ( grid.data[j+y][i+x] == '*' && data[j][i] == '*') {
                 return true;
             }
+
         }
 
     }
