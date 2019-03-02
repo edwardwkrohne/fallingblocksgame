@@ -23,6 +23,7 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST( anotherExample );
     CPPUNIT_TEST( testRotateCCW );
     CPPUNIT_TEST( testhasCollisionOccurred );
+    CPPUNIT_TEST( testCollisionOffsides );
     CPPUNIT_TEST_SUITE_END();
 
     double			m_value1;
@@ -32,6 +33,7 @@ class ExampleTestCase : public CppUnit::TestCase
     void            testRotateCCW ();
 
     void            testhasCollisionOccurred ();
+    void            testCollisionOffsides ();
 public:
 
     void			setUp ();
@@ -55,7 +57,6 @@ void ExampleTestCase::example ()
 {
     CPPUNIT_ASSERT (1 == 1);
 }
-
 
 
 void ExampleTestCase::anotherExample ()
@@ -115,6 +116,41 @@ void ExampleTestCase::testhasCollisionOccurred ()
     CPPUNIT_ASSERT(block1.hasCollisionOccurred(grid));
 
     CPPUNIT_ASSERT(!block2.hasCollisionOccurred(grid));
+}
+
+void ExampleTestCase::testCollisionOffsides ()
+{
+    GameGrid grid({
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+    });
+    Block block1(0,-2, 0); // dont collide
+    Block block2(0,-3, 0); // should collide
+    Block block3(-1,3, 0); // dont collisde
+    Block block4(-2,3,0); // should collide
+    CPPUNIT_ASSERT(!block1.hasCollisionOccurred(grid));
+    CPPUNIT_ASSERT(block2.hasCollisionOccurred(grid));
+    CPPUNIT_ASSERT(!block3.hasCollisionOccurred(grid));
+    CPPUNIT_ASSERT(block4.hasCollisionOccurred(grid));
+
 }
 
 ///////////////////////////////////////////////////

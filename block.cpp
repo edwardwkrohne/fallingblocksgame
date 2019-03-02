@@ -149,10 +149,20 @@ bool Block::hasCollisionOccurred(GameGrid& grid ){
     {
         for (int i = 0;i < 5;i++)
         {
+            if (data[j][i] == '*' && i+x < 0)
+            {
+                return true;
+            }
+
+            if (data [j][i] == '*' && j+y < 0)
+            {
+                return true;
+            }
 
             if ( grid.data[j+y][i+x] == '*' && data[j][i] == '*') {
                 return true;
             }
+
 
         }
 
