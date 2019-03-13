@@ -17,3 +17,6 @@ Note: If you're not reading this on GitHub, I use backticks to highlight code as
 7. Make sure the unit tests pass.  Commit and then push the fix.
 
 8. What is the purpose of the word `friend` in gamegrid.h?
+-------------------------------------------------------------------------------------------------------
+
+1. write code to handle collision for the right side and bottom checking for out of bounds cases

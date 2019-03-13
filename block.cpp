@@ -92,7 +92,7 @@ Block::Block(int _y, int _x, int pieceId) {
 void Block::copy_pieces(char (&dest)[5][5], const char (&src)[5][5]) {
     for (int i=0; i < 5; i++){
         for (int j=0; j < 5; j++){
-            dest[i][j] = src[i][j];
+            data[i][j] = src[i][j];
         }
     }
 }
@@ -163,7 +163,15 @@ bool Block::hasCollisionOccurred(GameGrid& grid ){
                 return true;
             }
 
+            if (data[j][i] == '*' && i+x > 9)
+            {
+                return true;
+            }
 
+            if (data[j][i] == '*' && j+y > 19)
+            {
+                return true;
+            }
         }
 
     }

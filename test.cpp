@@ -24,6 +24,11 @@ class ExampleTestCase : public CppUnit::TestCase
     CPPUNIT_TEST( testRotateCCW );
     CPPUNIT_TEST( testhasCollisionOccurred );
     CPPUNIT_TEST( testCollisionOffsides );
+    CPPUNIT_TEST( testhasCollisionOccurred );
+    CPPUNIT_TEST( testCollisionOffsides );
+    CPPUNIT_TEST( testlineCompleteNone );
+    CPPUNIT_TEST( testShift );
+
     CPPUNIT_TEST_SUITE_END();
 
     double			m_value1;
@@ -31,9 +36,13 @@ class ExampleTestCase : public CppUnit::TestCase
     void			example ();
     void			anotherExample ();
     void            testRotateCCW ();
-
+    void            testlineCompleteTwoRows();
+    void            testlineCompleteOffsetline();
+    void            testlineCompleteNone();
     void            testhasCollisionOccurred ();
     void            testCollisionOffsides ();
+    void            testShift ();
+
 public:
 
     void			setUp ();
@@ -73,6 +82,7 @@ void ExampleTestCase::testRotateCCW ()
     expected << "          " << endl;
     expected << "          " << endl;
 
+
     Block block(0,0, 0); // Is zero an L?
 
     block.rotateCCW();
@@ -85,7 +95,6 @@ void ExampleTestCase::testRotateCCW ()
 
 void ExampleTestCase::testhasCollisionOccurred ()
 {
-
 
 
     GameGrid grid({
@@ -142,16 +151,168 @@ void ExampleTestCase::testCollisionOffsides ()
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
     });
+
+        // {' ', ' ', ' ', ' ', ' '},
+        // {' ', ' ', '*', ' ', ' '},
+        // {' ', ' ', '*', ' ', ' '},
+        // {' ', ' ', '*', '*', ' '},
+        // {' ', ' ', ' ', ' ', ' '}
+
+
     Block block1(0,-2, 0); // dont collide
     Block block2(0,-3, 0); // should collide
     Block block3(-1,3, 0); // dont collisde
     Block block4(-2,3,0); // should collide
-    CPPUNIT_ASSERT(!block1.hasCollisionOccurred(grid));
+    Block block5(16,6, 0); // dont collisde
+    Block block6(16,7,0); // should collide
+    Block block7(17,6,0); // should collide
+
+        CPPUNIT_ASSERT(!block1.hasCollisionOccurred(grid));
+    //cppunit alwasys wants true, ! makes it want False
     CPPUNIT_ASSERT(block2.hasCollisionOccurred(grid));
     CPPUNIT_ASSERT(!block3.hasCollisionOccurred(grid));
     CPPUNIT_ASSERT(block4.hasCollisionOccurred(grid));
+    CPPUNIT_ASSERT(!block5.hasCollisionOccurred(grid));
+    CPPUNIT_ASSERT(block6.hasCollisionOccurred(grid));
+    CPPUNIT_ASSERT(block7.hasCollisionOccurred(grid));
 
 }
+
+void ExampleTestCase::testlineCompleteOffsetline ()
+{
+    GameGrid grid({
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'}
+    });
+
+    CPPUNIT_ASSERT(grid.lineComplete() == 16);
+
+}
+void ExampleTestCase::testlineCompleteNone ()
+{
+    GameGrid grid({
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'}
+    });
+
+    CPPUNIT_ASSERT(grid.lineComplete() == -1);
+
+}
+
+void ExampleTestCase::testlineCompleteTwoRows ()
+{
+    GameGrid grid({
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'},
+        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'}
+    });
+
+    CPPUNIT_ASSERT(grid.lineComplete() == 19);
+
+}
+
+
+void ExampleTestCase::testShift ()
+{
+    GameGrid grid({
+        //0    1    2    3    4    5    6    7    8    9
+        {' ', ' ', ' ', ' ', '*', ' ', ' ', '*', ' ', ' '}, // 0
+        {' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' '}, // 1
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 2
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 3
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 4
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 5
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 6
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 7
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, // 8
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' '}, // 9
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //10
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //11
+        {' ', ' ', ' ', ' ', ' ', '*', '*', ' ', ' ', ' '}, //12
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //13
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //14
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, //15
+        {'*', '*', '*', '*', '*', '*', '*', '*', '*', '*'}, //16
+        {' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', '*'}, //17
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*'}, //18
+        {'*', '*', ' ', '*', '*', '*', '*', '*', '*', '*'}  //19
+    });
+
+    grid.shift(16);
+
+    CPPUNIT_ASSERT(grid.getData(16,2) == ' ');
+    CPPUNIT_ASSERT(grid.getData(13,6) == '*');
+    CPPUNIT_ASSERT(grid.getData(10,7) == '*');
+    CPPUNIT_ASSERT(grid.getData(9,7) == ' ');
+    CPPUNIT_ASSERT(grid.getData(1,7) == '*');
+    CPPUNIT_ASSERT(grid.getData(2,3) == '*');
+    CPPUNIT_ASSERT(grid.getData(1,4) == '*');
+    CPPUNIT_ASSERT_EQUAL(' ', grid.getData(0,1));
+    CPPUNIT_ASSERT_EQUAL(' ', grid.getData(0,4));
+    CPPUNIT_ASSERT_EQUAL(' ', grid.getData(0,7));
+}
+
+
+
+
+
+
+
+
+
 
 ///////////////////////////////////////////////////
 // No need to modify anything below this line
